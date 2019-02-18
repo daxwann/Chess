@@ -1,12 +1,36 @@
 class Piece
   def initialize(color, board, pos)
-    raise ArgumentError unless %i(white black).include?(color)
+    raise ArgumentError unless %i(light_black black).include?(color)
     raise ArgumentError unless board.valid_pos?(pos)
     @color, @board, @pos = color, board, pos
     board.add_piece(self, pos)
   end
 
+  def to_s
+    " #{symbol} "
+  end
+
   def inspect
-    "piece"
+    @board.inspect
+  end
+
+  def empty?
+    false
+  end
+
+  def symbol
+    raise NotImplementedError
+  end
+
+  def valid_moves
+    moves.reject {|end_pos| move_into_check?(end_pos)}
+  end
+
+  private
+
+  def move_into_check?(end_pos)
+    test_board = board.dup
+    test_board.move_piece!(pos, end_pos)
+    test_board.in_check?(color)
   end
 end
