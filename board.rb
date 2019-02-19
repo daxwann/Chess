@@ -28,7 +28,7 @@ class Board
     self[pos] = piece
   end
 
-  def check_move(turn_color, start_pos, end_pos)
+  def move_piece(turn_color, start_pos, end_pos)
     piece = self[start_pos]
     if piece.empty?
       raise 'start position is empty'
