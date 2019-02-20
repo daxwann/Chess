@@ -1,5 +1,5 @@
 module Stepable
-    def moves
+    def Stepable.moves
         move_diffs.each_with_object([]) do |(dx, dy), moves|
             curr_x, curr_y = self.pos
             new_pos = [curr_x + dx, curr_y + dy]

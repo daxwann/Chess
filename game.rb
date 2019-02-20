@@ -15,10 +15,10 @@ class Game
   end
 
   def play
-    until board.checkmate?(self.current_player)
+    until self.board.checkmate?(self.current_player)
       begin
-        start_pos, end_pos = players[self.current_player].make_move(board)
-        board.move_piece(self.current_player, start_pos, end_pos)
+        start_pos, end_pos = self.players[self.current_player].make_move(board)
+        self.board.move_piece(self.current_player, start_pos, end_pos)
 
         swap_turn
         notify_players
@@ -28,7 +28,7 @@ class Game
       end
     end
 
-    display.render
+    self.display.render
     puts "#{self.current_player} is checkmated."
 
     nil
@@ -37,10 +37,10 @@ class Game
   private
 
   def notify_players
-    if board.in_check?(self.current_player)
-      display.in_check
+    if self.board.in_check?(self.current_player)
+      self.display.in_check
     else
-      display.uncheck
+      self.display.uncheck
     end
   end
 

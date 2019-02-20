@@ -10,7 +10,11 @@ class Bishop < Piece
 
     protected
 
+    def moves
+        Slideable.moves
+    end
+
     def move_dirs
-        diagonal_dirs
+        Slideable.diagonal_dirs
     end
 end

@@ -13,15 +13,15 @@ module Slideable
         [1, 1]
     ].freeze
 
-    def horizontal_vertical_dirs
+    def Slideable.horizontal_vertical_dirs
         HORIZONTAL_VERTICAL_DIRS
     end
 
-    def diagonal_dirs
+    def Slideable.diagonal_dirs
         DIAGONAL_DIRS
     end
 
-    def moves
+    def Slideable.moves
         moves = []
 
         move_dirs.each do |dx, dy|
