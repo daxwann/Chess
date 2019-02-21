@@ -65,7 +65,18 @@ class Board
     nil
   end
 
+  def in_check?(color)
+    king_pos = find_king(color).pos
+    pieces.any?
+  end
+
+  def pieces
+    @rows.flatten.reject(&:empty?)
+  end
+
   private
+
+  attr_reader: sentinel
 
   def fill_back_row(color)
     back_pieces = [
@@ -91,5 +102,10 @@ class Board
       fill_back_row(color)
       fill_pawns_row(color)
     end
+  end
+
+  def find_king(color)
+    king_pos = pieces.find {|p| p.color == color && p.is_a?(King)}
+    king_pos || (raise 'King not found')
   end
 end

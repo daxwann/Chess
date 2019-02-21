@@ -25,19 +25,19 @@ module Slideable
         moves = []
 
         move_dirs.each do |dx, dy|
-            moves.concat(find_unblocked_moves_in_dir(dx, dy))
+            moves.concat(Slideable.find_unblocked_moves(dx, dy))
         end
         moves
     end
 
     private
 
-    def move_dirs
+    def Slideable.move_dirs
         # subclass implements this
         raise NotImplementedError
     end
 
-    def find_unblocked_moves_in_dir(dx, dy)
+    def Slideable.find_unblocked_moves(dx, dy)
         curr_x, curr_y = self.pos
         moves = []
 

@@ -16,7 +16,7 @@ module Stepable
 
     private
 
-    def move_diffs
+    def Stepable.move_diffs
         # subclass implements this
         raise NotImplementedError
     end

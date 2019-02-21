@@ -8,9 +8,13 @@ class King < Piece
         "\u2654".colorize(@color)
     end
 
+    def moves
+        Stepable.moves
+    end
+
     protected
 
-    def move_diffs
+    def Stepable.move_diffs
         [
             [-1, -1],
             [-1, 0],

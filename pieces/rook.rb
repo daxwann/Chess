@@ -10,7 +10,7 @@ class Rook < Piece
 
     protected
 
-    def move_dirs
-        horizontal_vertical_dirs
+    def Slideable.move_dirs
+        Slideable.horizontal_vertical_dirs
     end
 end
