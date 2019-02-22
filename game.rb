@@ -48,3 +48,7 @@ class Game
     @current_player = self.current_player == :white ? :black : :white
   end
 end
+
+if __FILE__ == $PROGRAM_NAME
+  Game.new.play
+end

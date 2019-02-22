@@ -8,7 +8,7 @@ class Rook < Piece
         "\u265C".colorize(@color)
     end
 
-    # protected
+    protected
 
     def move_dirs
         horizontal_vertical_dirs

@@ -8,7 +8,7 @@ class Queen < Piece
         "\u265B".colorize(@color)
     end
 
-    # protected
+    protected
 
     def move_dirs
         horizontal_vertical_dirs + diagonal_dirs

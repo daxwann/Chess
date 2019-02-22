@@ -30,7 +30,7 @@ module Slideable
         moves
     end
 
-    # private
+    private
 
     def move_dirs
         # subclass implements this

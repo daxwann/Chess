@@ -31,7 +31,7 @@ class Piece
     moves.reject {|end_pos| move_into_check?(end_pos)}
   end
 
-  # private
+  private
 
   def move_into_check?(end_pos)
     test_board = board.dup

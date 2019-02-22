@@ -17,7 +17,7 @@ module Stepable
         end
     end
 
-    # private
+    private
 
     def move_diffs
         # subclass implements this

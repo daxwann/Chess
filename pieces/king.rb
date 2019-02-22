@@ -8,7 +8,7 @@ class King < Piece
         "\u2654".colorize(@color)
     end
 
-    # protected
+    protected
 
     def move_diffs
         [

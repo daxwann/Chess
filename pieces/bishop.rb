@@ -8,7 +8,7 @@ class Bishop < Piece
         "\u265D".colorize(@color)
     end
 
-    # protected
+    protected
 
     def move_dirs
         diagonal_dirs
