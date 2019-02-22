@@ -1,7 +1,12 @@
+require "colorize"
+
 class Piece
+  attr_reader :board, :color
+  attr_accessor :pos
+  
   def initialize(color, board, pos)
-    raise ArgumentError unless %i(light_black black).include?(color)
-    raise ArgumentError unless board.valid_pos?(pos)
+    raise ArgumentError, "invalid color" unless %i(white black).include?(color)
+    raise ArgumentError, "invalid pos" unless board.valid_pos?(pos)
     @color, @board, @pos = color, board, pos
     board.add_piece(self, pos)
   end
@@ -11,7 +16,7 @@ class Piece
   end
 
   def inspect
-    @board.inspect
+    self.symbol.inspect
   end
 
   def empty?
@@ -26,7 +31,7 @@ class Piece
     moves.reject {|end_pos| move_into_check?(end_pos)}
   end
 
-  private
+  # private
 
   def move_into_check?(end_pos)
     test_board = board.dup

@@ -29,9 +29,9 @@ class Display
         elsif cursor.cursor_pos == [x, y]
             bg = :light_red
         elsif (x + y).odd?
-            bg = :light_blue
+            bg = :magenta
         else
-            bg = :yellow
+            bg = :blue
         end
         { background: bg }
     end
@@ -50,7 +50,7 @@ class Display
 
     def render
         system("clear")
-        puts "Arrow keys, WASD, or vim to move. Space or enter to confirm."
+        puts "Arrow keys or WASD to move. Space or enter to confirm."
         build_grid.each {|row| puts row.join}
         @notifications.each do |key, val|
             puts val

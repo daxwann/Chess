@@ -1,22 +1,25 @@
+require "byebug"
+
 module Stepable
-    def Stepable.moves
-        move_diffs.each_with_object([]) do |(dx, dy), moves|
-            curr_x, curr_y = self.pos
+    def moves
+        move_diffs.each_with_object([]) do |diff, moves|
+            dx, dy = diff
+            curr_x, curr_y = pos
             new_pos = [curr_x + dx, curr_y + dy]
 
-            next unless board.valid_pos?(pos)
+            next unless board.valid_pos?(new_pos)
 
-            if board.empty?(pos)
-                moves << pos
-            elsif board[pos].color != color
-                moves << pos
+            if board.empty?(new_pos)
+                moves << new_pos
+            elsif board[new_pos].color != color
+                moves << new_pos
             end
         end
     end
 
-    private
+    # private
 
-    def Stepable.move_diffs
+    def move_diffs
         # subclass implements this
         raise NotImplementedError
     end

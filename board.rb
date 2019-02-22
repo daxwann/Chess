@@ -1,4 +1,5 @@
 require_relative 'pieces'
+require "byebug"
 
 class Board
   attr_reader :rows
@@ -9,13 +10,13 @@ class Board
   end
 
   def [](pos)
-    raise ArgumentError unless valid_pos?(pos)
+    raise ArgumentError, "invalid pos" unless valid_pos?(pos)
     x, y = pos
     @rows[y][x]
   end
 
   def []=(pos, piece)
-    raise ArgumentError unless valid_pos?(pos)
+    raise ArgumentError, "invalid pos" unless valid_pos?(pos)
     x, y = pos
     @rows[y][x] = piece
   end
@@ -25,6 +26,7 @@ class Board
   end
 
   def add_piece(piece, pos)
+    raise ArgumentError, "position not empty" unless empty?(pos)
     self[pos] = piece
   end
 
@@ -60,23 +62,37 @@ class Board
     piece = self[start_pos]
     raise 'Piece does not move like that' unless piece.moves.include?(end_pos)
     self[end_pos] = piece
-    self[start_pos] = @sentinel
+    self[start_pos] = sentinel
     piece.pos = end_pos
     nil
   end
 
   def in_check?(color)
     king_pos = find_king(color).pos
-    pieces.any?
+    pieces.any? do |p|
+      p.color != color && p.moves.include?(king_pos)
+    end
+  end
+
+  def checkmate?(color)
+    return false unless in_check?(color)
+    pieces.select {|p| p.color == color}.all? do |piece|
+      piece.valid_moves.empty?
+    end
   end
 
   def pieces
     @rows.flatten.reject(&:empty?)
   end
 
+  def find_king(color)
+    king_pos = pieces.find {|p| p.color == color && p.is_a?(King)}
+    king_pos || (raise 'King not found')
+  end
+
   private
 
-  attr_reader: sentinel
+  attr_reader :sentinel
 
   def fill_back_row(color)
     back_pieces = [
@@ -84,28 +100,24 @@ class Board
       Knight, Rook
     ]
 
-    row = color == :light_black ? 7 : 0
+    row = color == :white ? 7 : 0
     back_pieces.each_with_index do |type, col|
       type.new(color, self, [col, row])
     end
   end
 
   def fill_pawns_row(color)
-    row = color == :light_black ? 6 : 1
+    row = color == :white ? 6 : 1
     8.times {|col| Pawn.new(color, self, [col, row])}
   end
 
   def make_starting_grid(fill_board)
     @rows = Array.new(8) { Array.new(8, @sentinel)}
     return unless fill_board
-    %i(light_black black).each do |color|
+    %i(white black).each do |color|
       fill_back_row(color)
       fill_pawns_row(color)
     end
   end
 
-  def find_king(color)
-    king_pos = pieces.find {|p| p.color == color && p.is_a?(King)}
-    king_pos || (raise 'King not found')
-  end
 end

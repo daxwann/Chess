@@ -8,9 +8,9 @@ class Rook < Piece
         "\u265C".colorize(@color)
     end
 
-    protected
+    # protected
 
-    def Slideable.move_dirs
-        Slideable.horizontal_vertical_dirs
+    def move_dirs
+        horizontal_vertical_dirs
     end
 end

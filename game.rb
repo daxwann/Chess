@@ -1,5 +1,5 @@
 require_relative 'board'
-require_relative 'human_player'
+require_relative 'player_human'
 
 class Game
   attr_reader :board, :display, :current_player, :players
@@ -8,8 +8,8 @@ class Game
     @board = Board.new
     @display = Display.new(@board)
     @players = {
-      white: HumanPlayer.new(:white, @display),
-      black: HumanPlayer.new(:black, @display)
+      white: PlayerHuman.new(:white, @display),
+      black: PlayerHuman.new(:black, @display)
     }
     @current_player = :white
   end
@@ -17,7 +17,7 @@ class Game
   def play
     until self.board.checkmate?(self.current_player)
       begin
-        start_pos, end_pos = self.players[self.current_player].make_move(board)
+        start_pos, end_pos = self.players[self.current_player].make_move(self.board)
         self.board.move_piece(self.current_player, start_pos, end_pos)
 
         swap_turn
@@ -45,7 +45,6 @@ class Game
   end
 
   def swap_turn
-    @current_player = self.current_player == :white? :black : :white
+    @current_player = self.current_player == :white ? :black : :white
   end
-
 end

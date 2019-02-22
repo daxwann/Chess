@@ -8,13 +8,9 @@ class Knight < Piece
         "\u2658".colorize(@color)
     end
 
-    def moves
-        Stepable.moves
-    end
+    # protected
 
-    protected
-
-    def Stepable.move_diffs
+    def move_diffs
         [
             [-2, -1],
             [-1, -2],

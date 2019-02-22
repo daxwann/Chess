@@ -8,13 +8,9 @@ class Queen < Piece
         "\u265B".colorize(@color)
     end
 
-    def moves
-        Slideable.moves
-    end
+    # protected
 
-    protected
-
-    def Slideable.move_dirs
-        Slideable.horizontal_vertical_dirs + Slideable.diagonal_dirs
+    def move_dirs
+        horizontal_vertical_dirs + diagonal_dirs
     end
 end

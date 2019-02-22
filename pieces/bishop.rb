@@ -8,13 +8,9 @@ class Bishop < Piece
         "\u265D".colorize(@color)
     end
 
-    protected
+    # protected
 
-    def moves
-        Slideable.moves
-    end
-
-    def Slideable.move_dirs
-        Slideable.diagonal_dirs
+    def move_dirs
+        diagonal_dirs
     end
 end
