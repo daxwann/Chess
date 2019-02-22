@@ -12,6 +12,7 @@ Human-vs-human chess game in Ruby using OOP.
 
 ## How To Play
 ```
+bundle install # install dependencies
 ruby game.rb
 ```
 * does not support en passant, castling, pawn promotion, or draws.
